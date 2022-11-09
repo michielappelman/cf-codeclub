@@ -3,4 +3,4 @@ main = "./index.js"
 compatibility_date = "2022-11-08"
 
 [vars]
-THIS_IS_ENV = "test"
+DEBUG = 1

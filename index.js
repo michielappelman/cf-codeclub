@@ -5,6 +5,9 @@ export default {
     let response = { message: "Something went wrong.", error: true };
     let headers = { "content-type": "application/json" };
 
+    if (env.DEBUG) {
+      console.log(`HTTP Method: ${request.method}`);
+    }
     switch (request.method) {
       case "GET":
         response = "Hello to you in plain text!";
@@ -12,6 +15,9 @@ export default {
         break;
       case "POST":
         const name = new URL(request.url).searchParams.get("name");
+        if (env.DEBUG) {
+          console.log(`name: ${name}`);
+        }
 
         if (!name) {
           response = { message: "Missing parameter `name`", error: true };
