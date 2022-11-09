@@ -1,31 +1,33 @@
 export default {
   async fetch(request, env) {
-    console.log(env);
+    // Default reply will be a JSON message and if we didn't change it,
+    // something probalby went wrong.
+    let response = { message: "Something went wrong.", error: true };
+    let headers = { "content-type": "application/json" };
+
     switch (request.method) {
       case "GET":
-        return new Response("Hello to GET a worker!", {
-          headers: {
-            "content-type": "text/plain",
-          },
-        });
-      case "POST": {
-        let response = { message: "Hello to POST worker", error: false };
-        return new Response(JSON.stringify(response), {
-          headers: {
-            "content-type": "application/json",
-          },
-        });
-      }
-      // I need curly braces here because the `response` variable is already
-      // declared above and is not scoped to the `case` block by default.
-      default: {
-        let response = { message: "Unsupported HTTP method", error: true };
-        return new Response(JSON.stringify(response), {
-          headers: {
-            "content-type": "text/plain",
-          },
-        });
-      }
+        response = "Hello to you in plain text!";
+        headers = { "content-type": "text/plain" };
+        break;
+      case "POST":
+        const name = new URL(request.url).searchParams.get("name");
+
+        if (!name) {
+          response = { message: "Missing parameter `name`", error: true };
+          break;
+        }
+
+        response = { message: `Hello to you, ${name}!`, error: false };
+        break;
+      default:
+        response = { message: "Unsupported HTTP method", error: true };
+    }
+
+    if (headers["content-type"] == "application/json") {
+      return new Response(JSON.stringify(response), { headers: headers });
+    } else {
+      return new Response(response, { headers: headers });
     }
   },
 };
