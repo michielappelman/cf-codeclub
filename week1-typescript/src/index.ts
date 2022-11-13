@@ -22,8 +22,9 @@ export default {
   <label for="name">Your name:</label><br>
   <input type="text" id="name" name="name">
   <button type="submit">Say Hi!</button>
-</form></section></body>
-</html>`;
+</form></section>
+<footer><a href="https://github.com/michielappelman/cf-codeclub/blob/main/week1-typescript/src/index.ts">Source</a></footer>
+</body></html>`;
         break;
       case "POST":
         const data = await request.formData();
