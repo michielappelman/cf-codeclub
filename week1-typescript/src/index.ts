@@ -4,6 +4,11 @@ interface Environment {
 
 export default {
   async fetch(request: Request, env: Environment): Promise<Response> {
+    const form = `<form hx-post="/" hx-target="#formsection">
+  <label for="name">Your name:</label><br>
+  <input type="text" id="name" name="name">
+  <button type="submit">Say Hi!</button>
+</form>`
     let response: string;
 
     if (env.DEBUG) {
@@ -17,14 +22,10 @@ export default {
 <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.8.4/htmx.min.js"></script>
 </head>
-<body><header><h1>Allow me to say Hi</h1><hr></header>
-<section><form id="nameform" hx-post="/" hx-target="#nameform" hx-swap="outerHTML">
-  <label for="name">Your name:</label><br>
-  <input type="text" id="name" name="name">
-  <button type="submit">Say Hi!</button>
-</form></section>
+<body><header><h1>Allow me to say Hi</h1><hr></header><main>
+<section id="formsection">${form}</section>
 <footer><a href="https://github.com/michielappelman/cf-codeclub/blob/main/week1-typescript/src/index.ts">Source</a></footer>
-</body></html>`;
+</main></body></html>`;
         break;
       case "POST":
         const data = await request.formData();
@@ -34,11 +35,11 @@ export default {
         }
 
         if (!name) {
-          response = "<h2>Please provide your name...</h2>";
+          response = `<header><h2>Error: Missing name.</h2></header>${form}`;
           break;
         }
 
-        response = `<h2>Hi, ${name}!</h2>`;
+        response = `<header><h2>Hi, ${name}!</h2></header>`;
         break;
       default:
         response = "<html><body><h2>Unsupported method</h2></body></html>";
