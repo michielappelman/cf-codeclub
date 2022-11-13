@@ -14,13 +14,15 @@ export default {
         response = `<!DOCTYPE html><html><head>
 <meta charset="utf-8">
 <title>Michiel's Hi-sayer</title>
+<link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.8.4/htmx.min.js"></script>
 </head>
-<body><center><form id="nameform" hx-post="/" hx-target="#nameform" hx-swap="outerHTML">
+<body><header><h1>Allow me to say Hi</h1><hr></header>
+<section><form id="nameform" hx-post="/" hx-target="#nameform" hx-swap="outerHTML">
   <label for="name">Your name:</label><br>
   <input type="text" id="name" name="name">
   <button type="submit">Say Hi!</button>
-</form></center></body>
+</form></section></body>
 </html>`;
         break;
       case "POST":
@@ -35,7 +37,7 @@ export default {
           break;
         }
 
-        response = `<h1>Hi, ${name}!</h1>`;
+        response = `<h2>Hi, ${name}!</h2>`;
         break;
       default:
         response = "<html><body><h2>Unsupported method</h2></body></html>";
