@@ -35,7 +35,7 @@ const baseLayout = (content: HTMLContent) => html`<!DOCTYPE html>
       <main>
         ${content}
         <footer>
-          <a href="https://github.com/michielappelman/cf-codeclub/">Source</a>
+          <a href="https://github.com/michielappelman/cf-codeclub/blob/main/week2/src/index.ts">Source</a>
         </footer>
       </main>
     </body>
