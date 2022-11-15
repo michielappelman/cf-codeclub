@@ -26,7 +26,6 @@ const baseLayout = (content: HTMLContent) => html`<!DOCTYPE html>
     <head>
       <title>Random Rick</title>
       <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css" />
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.8.4/htmx.min.js"></script>
     </head>
     <body>
       <header>
