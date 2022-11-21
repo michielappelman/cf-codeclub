@@ -1,0 +1,10 @@
+name = "week3"
+main = "src/index.ts"
+compatibility_date = "2022-11-11"
+
+routes = [
+  { pattern = "week3.michiel.cloud", custom_domain = true, zone_name = "michiel.cloud" }
+]
+
+[vars]
+DEBUG = true
